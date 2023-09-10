@@ -1,0 +1,364 @@
+{%- style -%}
+
+{% if section.settings.is_theme_font_style_used == true %}
+    {{section.settings.font_style | font_face}}{% endif %}
+
+{% comment %}
+    Grid system{% endcomment %}
+ .dg-container__{{section.id}}{
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media(min-width: 576px) {
+    .dg-container__{{section.id}}{
+        max-width: 540px;
+    }
+}
+
+@media(min-width: 768px) {
+    .dg-container__{{section.id}}{
+        max-width: 720px;
+    }
+}
+
+@media(min-width: 992px) {
+    .dg-container__{{section.id}}{
+        max-width: 960px;
+    }
+}
+
+@media(min-width: 1200px) {
+    .dg-container__{{section.id}}{
+        max-width: 1140px;
+    }
+}
+
+@media(min-width: 1400px) {
+    .dg-container__{{section.id}}{
+        max-width: 1320px;
+    }
+}
+.dg-row__{{section.id}}{
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: calc(var(--bs-gutter-y) * -1);
+    margin-right: calc(var(--bs-gutter-x) * -0.5);
+    margin-left: calc(var(--bs-gutter-x) * -0.5);
+}
+.dg-row__{{section.id}}> * {
+    box-sizing: border-box;
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 100%;
+    padding-right: calc(var(--bs-gutter-x) * 0.5);
+    padding-left: calc(var(--bs-gutter-x) * 0.5);
+    margin-top: var(--bs-gutter-y);
+}
+
+@media(min-width: 576px) {
+    .dg-col-sm-9__{{section.id}}{
+        flex: 0 0 auto;
+        width: 75%;
+    }
+}
+
+.dg-justify-content__{{section.id}}{
+    justify-content: center;
+}
+{% comment %}
+    End grid system{% endcomment %}
+ .phrase-section__{{section.id}}{
+    padding-top: 55px;
+    padding-bottom: 0px;
+    {% if section.settings.is_theme_font_style_used == true %}
+        font-family: {{section.settings.font_style.family}};
+    {% endif %}
+    color: {{section.settings.text_color}};
+    background-color: {{section.settings.section_background_color}};
+}
+
+.lines__{{section.id}}{
+    display: flex;
+    flex-direction: dg-row__{{section.id}};
+    align-items: center;
+    justify-content: center;
+}
+
+.line__{{section.id}}{
+    border-bottom: 1px solid {{section.settings.badge_color}};
+    height: 1px;
+    flex-grow: 1;
+    display: block !important;
+}
+
+.title__{{section.id}}{
+    padding: 10px 43px;
+    text-align: center;
+    font-size: {{section.settings.title_font_size}}px;
+    font-weight: {{section.settings.title_font_weight}};
+    font-style: {{section.settings.title_font_style}};
+    background-color: {{section.settings.badge_color}};
+    color: {{section.settings.title_color}};
+}
+
+.description__{{section.id}}{
+    margin-top: {{section.settings.description_margin}}px;
+    margin-bottom: {{section.settings.description_margin}}px;
+    text-align: center;
+    font-size: {{section.settings.description_font_size}}px;
+}
+
+.description__{{section.id}} > p {
+    margin: 0;
+    color: {{section.settings.text_color}};
+}
+
+@media(max-width: 576px) {
+    .phrase-section__{{section.id}}{
+        padding-top: {{section.settings.section_padding_top_mobile}}px;
+        padding-bottom: {{section.settings.section_padding_bottom_mobile}}px;
+    }
+
+    .title__{{section.id}}{
+        font-size: {{section.settings.title_font_size_mobile}}px;
+    }
+
+    .description__{{section.id}}{
+        margin-top: {{section.settings.description_margin_mobile}}px;
+        margin-bottom: {{section.settings.description_margin_mobile}}px;
+
+        font-size: {{section.settings.description_font_size_mobile}}px;
+    }
+}
+
+{%- endstyle -%}{%-style-%}
+
+    {{section.settings.custom_css}}
+
+{%-endstyle-%}
+<div class="phrase-section__{{section.id}}">
+    <div class="dg-container__{{section.id}}">
+        {%if section.settings.description_text != blank%}
+            <div class="dg-row__{{section.id}} dg-justify-content__{{section.id}}">
+                <div class="dg-col-sm-9__{{section.id}}">
+                    <div class="lines__{{section.id}}">
+                        <div class="line__{{section.id}}"></div>
+                        <div class="title__{{section.id}}">{{section.settings.title_text}}</div>
+                        <div class="line__{{section.id}}"></div>
+                    </div>
+
+                    <div class="description__{{section.id}}">{{ section.settings.description_text }}</div>
+
+                    <div class="lines__{{section.id}}">
+                        <div class="line__{{section.id}}"></div>
+                    </div>
+                </div>
+            </div>
+        {%endif%}
+    </div>
+</div>
+
+{% schema %}
+
+{
+    "name": "Dingo-Phrase-1",
+    "tag": "section",
+    "class": "spaced-section spaced-section--full-width",
+    "settings": [
+        {
+            "type": "header",
+            "content": "Main settings"
+        }, {
+            "type": "text",
+            "id": "title_text",
+            "default": "TITLE",
+            "label": "Title text"
+        }, {
+            "type": "richtext",
+            "id": "description_text",
+            "default": "<p>Use this text to share information about your main goal.</p>",
+            "label": "Description text"
+        },
+        {
+            "type": "header",
+            "content": "Common text settings"
+        }, {
+            "type": "checkbox",
+            "id": "is_theme_font_style_used",
+            "default": false,
+            "label": "Override default font"
+        }, {
+            "type": "font_picker",
+            "id": "font_style",
+            "default": "roboto_n4",
+            "label": "Font style",
+            "info": "CAUTION: Custom fonts might cause slower load times. If you would like to use a custom font please enable 'Override default font'"
+        }, {
+            "type": "color",
+            "id": "text_color",
+            "label": "Text color",
+            "default": "#000000"
+        },
+        
+        {
+            "type": "header",
+            "content": "Text settings"
+        }, {
+            "type": "color",
+            "id": "title_color",
+            "label": "Title color",
+            "default": "#ffffff"
+        }, {
+            "type": "color",
+            "id": "badge_color",
+            "label": "Badge color",
+            "default": "#000000"
+        }, {
+            "type": "range",
+            "id": "title_font_size",
+            "min": 10,
+            "max": 30,
+            "step": 1,
+            "unit": "px",
+            "label": "Title font size",
+            "default": 16
+        }, {
+            "type": "range",
+            "id": "title_font_size_mobile",
+            "min": 10,
+            "max": 30,
+            "step": 1,
+            "unit": "px",
+            "label": "Title font size (mobile)",
+            "default": 12
+        }, {
+            "type": "select",
+            "id": "title_font_weight",
+            "label": "Title font weight",
+            "options": [
+                {
+                    "value": "normal",
+                    "label": "normal"
+                }, {
+                    "value": "bold",
+                    "label": "bold"
+                }
+            ],
+            "default": "bold"
+        }, {
+            "type": "select",
+            "id": "title_font_style",
+            "label": "Title font style",
+            "options": [
+                {
+                    "value": "normal",
+                    "label": "normal"
+                }, {
+                    "value": "italic",
+                    "label": "italic"
+                }
+            ],
+            "default": "normal"
+        }, {
+            "type": "range",
+            "id": "description_font_size",
+            "min": 16,
+            "max": 40,
+            "step": 1,
+            "unit": "px",
+            "label": "Description font size",
+            "default": 38
+        }, {
+            "type": "range",
+            "id": "description_font_size_mobile",
+            "min": 16,
+            "max": 40,
+            "step": 1,
+            "unit": "px",
+            "label": "Description font size (mobile)",
+            "default": 26
+        }, {
+            "type": "range",
+            "id": "description_margin",
+            "min": 40,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Description vertical margin",
+            "default": 50
+        }, {
+            "type": "range",
+            "id": "description_margin_mobile",
+            "min": 40,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Description vertical margin (mobile)",
+            "default": 40
+        }, {
+            "type": "header",
+            "content": "Layout settings"
+        }, {
+            "type": "color",
+            "id": "section_background_color",
+            "label": "Section background color",
+            "default": "#ffffff"
+        }, {
+            "type": "range",
+            "id": "section_padding_top",
+            "min": 60,
+            "max": 200,
+            "step": 10,
+            "unit": "px",
+            "label": "Section top padding",
+            "default": 80
+        }, {
+            "type": "range",
+            "id": "section_padding_bottom",
+            "min": 60,
+            "max": 200,
+            "step": 10,
+            "unit": "px",
+            "label": "Section bottom padding",
+            "default": 80
+        }, {
+            "type": "range",
+            "id": "section_padding_top_mobile",
+            "min": 60,
+            "max": 200,
+            "step": 10,
+            "unit": "px",
+            "label": "Section top padding (mobile)",
+            "default": 80
+        }, {
+            "type": "range",
+            "id": "section_padding_bottom_mobile",
+            "min": 60,
+            "max": 200,
+            "step": 10,
+            "unit": "px",
+            "label": "Section bottom padding (mobile)",
+            "default": 80
+        }, {
+            "type": "header",
+            "content": "Custom settings"
+        }, {
+            "type": "textarea",
+            "id": "custom_css",
+            "label": "Custom CSS"
+        }
+    ],
+    "presets": [
+        {
+            "name": "Dingo-Phrase-1"
+        }
+    ]
+}
+
+{% endschema %}

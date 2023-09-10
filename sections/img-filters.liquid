@@ -1,0 +1,37 @@
+<style>
+
+      #shopify-section-{{section.id}} {
+    border-top: 0px solid #e3e3e3 !important;
+}
+</style>
+
+<center>
+<img {%if section.settings.mobileonly %} class="mobileonly" {%endif%} src="{{section.settings.filteredimage | img_url: 'master' }}">
+</center>
+
+{% schema %}
+{
+  "name": "Image with mobile filter",
+  "class": "shopify-section--bordered",
+  "settings": [
+    {
+      "type": "image_picker",
+      "id": "filteredimage",
+      "label": "Show image below tabs"
+    },
+{
+   "type": "checkbox",
+   "id": "mobileonly",
+   "default": true,
+   "label": "only show image on mobile"
+}
+  ],
+  "presets": [
+    {
+      "category": "Image",
+      "name": "Image with mobile filter",
+      "settings": {}
+    }
+  ]
+}
+{% endschema %}

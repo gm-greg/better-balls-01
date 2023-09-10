@@ -1,0 +1,167 @@
+<script type="text/javascript" src="{{ 'jquery_accordion.min.js' | asset_url }}"></script>
+<script type="text/javascript">(function($){$(document).ready(function() {$('.accordion').accordion({defaultOpen: 'section1',cookieName: 'accordion_nav'});});})(jQuery);</script>
+<style>.atitles{margin-left: 10px;margin-bottom:{%- assign direction = section.settings.headingdirection | remove: "+" -%}{{direction}}{{section.settings.margintitle}}px !important; margin-top:{%- assign direction = section.settings.headingdirection | remove: "+" -%}{{direction}}{{section.settings.margintitle}}px !important;}.qfont {margin-bottom:0px !important;}.accordion { {% if section.settings.slant %} transform: skewX(-12deg); {% endif %} margin: 0; padding-top: 10px;padding-bottom: 10px;padding-left: 10px;padding-right: 10px; margin-bottom:{{section.settings.margin}}px; background: {{section.settings.questionbgcolor}}; text-decoration:none; color:{{section.settings.questiontitlecolor}}; font-size:1em; position:relative; border-bottom: 1px solid {{section.settings.accordianborderbottom}}; -webkit-box-shadow: 6px 5px 0px -2px {{section.settings.accordianborderbottom}}; -moz-box-shadow: 6px 5px 0px -2px {{section.settings.accordianborderbottom}}; box-shadow: 6px 5px 0px -2px {{section.settings.accordianborderbottom}}; transition: box-shadow 0.3s ease-in-out; } .accordion-open { background:{{section.settings.answerbgcolor}}; color: {{section.settings.answerfontcolor}}; border-bottom: 1px solid {{section.settings.accordianborderbottomopen}} !important;    -webkit-box-shadow: 0px 0px 0px 0px #1e602c00; -moz-box-shadow: 0px 0px 0px 0px #1e602c00; box-shadow: 0px 0px 0px 0px #1e602c00; transition: box-shadow 0.3s ease-in-out; } .accordion-open span { display:block; position:absolute; right:3px; top:25%; padding:10px; } .accordion-open span { background:url('{{ 'minus.png' | asset_url }}') center center no-repeat; } .accordion-close span { display:block; position:absolute; right:3px; top:25%; background:url('{{ 'plus.png' | asset_url }}') center center no-repeat; padding:10px; } .faqpage div.container { padding:0; margin:0; } .faqpage div.container { max-width:100%; padding:5px 0; } .faqpage div.content { {% if section.settings.slant %} transform: skewX(12deg); {% endif %} border: 1px solid {{section.settings.contentbordercolor}}; margin: 0; padding:10px; font-size:.9em; line-height:1.5em;   background:{{section.settings.contentbgcolor}}; } .faqpage div.content ul { padding:0; margin:0; padding:3px; } .faqpage div.content p { padding:0; margin:3px 0 10px; padding:3px; } .faqpage div.content ul li { list-style-position:inside; line-height:25px; }
+
+
+</style>
+{%- for block in section.blocks -%}
+{%- if block.settings.title != blank -%}
+<{{section.settings.heading}} class="atitles">{{block.settings.title }}</{{section.settings.heading}}>
+{%- else -%}
+{%- endif -%}
+<div class="accordion" id="section1-{{block.id}}"><h4 class="product__title qfont">{{block.settings.question}}</h4><span></span></div>
+<div class="container">
+<div class="content">{{ block.settings.column_richtext }}</div>
+</div>
+{%- endfor -%}
+<br>
+<h1 class="text-center h2">{{section.settings.contacttitle}}</h1>
+<br>
+{% schema %}
+{
+  "name": "Faq",
+  "class": "shopify-section--bordered",
+  "settings": [
+{
+   "type": "color",
+   "id": "accordianborderbottom",
+   "label": "Border color",
+   "default": "#009997"
+},
+{
+   "type": "color",
+   "id": "accordianborderbottomopen",
+   "label": "Border color when open",
+   "default": "#009997"
+},
+{
+   "type": "checkbox",
+   "id": "slant",
+   "default": true,
+   "label": "Enable slanted style"
+},
+{
+    "type":      "range",
+    "id":        "margin",
+    "min":       0,
+    "max":        10,
+    "step":       1,
+    "unit":       "px",
+    "label":     "Adjust the spacing between each accordian",
+    "default":   2
+},
+
+{
+   "type": "color",
+   "id": "questiontitlecolor",
+   "label": "Question font color",
+   "default": "#1E602C"
+},
+{
+   "type": "color",
+   "id": "answerfontcolor",
+   "label": "Answer font color",
+   "default": "#1E602C"
+},
+{
+   "type": "color",
+   "id": "questionbgcolor",
+   "label": "Question background color",
+   "default": "#c8e8e5"
+},
+{
+   "type": "color",
+   "id": "answerbgcolor",
+   "label": "Question background color after open",
+   "default": "#fde2d1"
+},
+{
+   "type": "color",
+   "id": "contentbgcolor",
+   "label": "Question background content color after open",
+   "default": "#fbfbfb"
+},
+{
+   "type": "color",
+   "id": "contentbordercolor",
+   "label": "Question border content color after open",
+   "default": "#f9a46e"
+},
+{
+        "type": "text",
+        "id": "contacttitle",
+        "default": "Add a title to contact form",
+        "label": "Contact title"
+      },
+{
+   "type": "select",
+   "id": "heading",
+   "options": [
+      { "value": "h1", "label": "h1"},
+      { "value": "h2", "label": "h3"},
+      { "value": "h3", "label": "h3"},
+      { "value": "h4", "label": "h4"},
+      { "value": "h5", "label": "h5"}
+   ],
+   "label": "Title font size"
+},
+{
+   "type": "select",
+   "id": "headingdirection",
+   "options": [
+      { "value": "+", "label": "⬆"},
+      { "value": "-", "label": "⬇"}
+   ],
+   "label": "Title direction"
+},
+{
+    "type":      "range",
+    "id":        "margintitle",
+    "min":       0,
+    "max":        35,
+    "step":       1,
+    "unit":       "px",
+    "label":     "Adjust the spacing between titles and accordians",
+    "default":   2
+}
+
+  ]
+,
+    "blocks":
+ [
+   {
+     "type": "block-1",
+     "name": "Faq",
+     "settings": [
+	{
+        "type": "text",
+        "id": "title",
+        "default": "Add a title to create sections",
+        "label": "Add a title"
+      },
+
+ 	   {
+        "type": "text",
+        "id": "question",
+        "default": "Question",
+        "label": "Add a question"
+      },
+      {
+   "type": "richtext",
+   "id": "column_richtext",
+   "label": "Answer",
+   "default": "<p>Default <em>richtext</em> <a href=\"https://example.com/\">content</a></p>"
+      }
+     ]
+   }
+ ],
+
+  "presets": [
+    {
+      "category": "Text",
+      "name": "Faq"
+    }
+  ]
+}
+
+{% endschema %}

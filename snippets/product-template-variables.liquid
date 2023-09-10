@@ -1,0 +1,113 @@
+{%- assign current_variant = product.selected_or_first_available_variant -%}
+{%- assign review_rating = false -%}
+
+{%- if product.metafields.spr.reviews != blank -%}
+    {%- assign ratingValueReviewArray = product.metafields.spr.reviews | split: '"ratingValue": "' -%}
+    {%- assign ratingValueArr = ratingValueReviewArray[1] |split: '"' -%}
+    {%- assign reviewValue = ratingValueArr[0] -%}
+    {%- assign reviewsCountStrArray = product.metafields.spr.reviews | split: '"reviewCount": "' -%}
+    {%- assign reviewsCountArr = reviewsCountStrArray[1] | split: '"' -%}
+    {%- assign reviewsCount = reviewsCountArr[0] -%}
+    {%- unless reviewsCount == blank -%}
+        {%- assign reviewAppDescription = '"Shopify Product Reviews"' -%}
+        {%- assign ratingValue = reviewValue -%}
+        {%- assign reviewCount = reviewsCount -%}
+    {%- endunless -%}
+{%- elsif product.metafields.loox.avg_rating != blank -%}
+    {%- assign reviewAppDescription = '"Loox Product Reviews"' -%}
+    {%- assign ratingValue = product.metafields.loox.avg_rating -%}
+    {%- assign reviewCount = product.metafields.loox.num_reviews -%}
+{%- elsif product.metafields.yotpo.reviews_count and product.metafields.yotpo.reviews_count != "0" -%}
+    {%- assign reviewAppDescription = '"Yotpo Product Reviews"' -%}
+    {%- assign ratingValue = product.metafields.yotpo.reviews_average -%}
+    {%- assign reviewCount = product.metafields.yotpo.reviews_count -%}
+{%- endif -%}
+
+{%- if reviewAppDescription == blank and ratingValue == blank and reviewCount == blank  -%}
+    {%- assign reviewAppDescription = '"Product Reviews"' -%}
+    {%- assign ratingValue = 5 -%}
+    {%- assign reviewCount = 27 -%}
+{%- endif -%}
+
+
+<script type="application/ld+json">
+{
+    "@context": "https://schema.org",
+    "@type": "Product",
+    "@id": "{{ shop.url }}{{ product.url }}#productSchema",
+    "offers": [
+      {%- for variant in product.variants -%}
+        {
+          "@type": "Offer",
+          "name": {{ variant.title | json }},
+          "availability": {%- if variant.available -%}"https://schema.org/InStock"{%- else -%}"https://schema.org/OutOfStock"{%- endif -%},
+          "price": {{ variant.price | divided_by: 100.00 | json }},
+          "priceCurrency": {{ shop.currency | json }},
+          "priceValidUntil": {{ 'now' | date: '%s' | plus: 864000 | date: '%Y-%m-%d' | json }},
+          {%- if variant.sku != blank -%}
+            "sku": {{ variant.sku | json }},
+          {%- endif -%}
+          "url": {{ shop.url | append: variant.url | json }}
+        }{% unless forloop.last %},{% endunless %}
+      {%- endfor -%}
+    ],
+    "brand": {
+      "name": {{ product.vendor | json }}
+    },
+    "name": {{ product.title | json }},
+    "description": {{ product.description | strip_html | json }},
+    "category": {{ product.type | json }},
+    "url": "{{ shop.url }}{{ product.url }}",
+    "sku": {{ product.selected_or_first_available_variant.sku | default: product.selected_or_first_available_variant.id | default: product.id | json }},
+    "mpn": {{ product.selected_or_first_available_variant.barcode | default: product.selected_or_first_available_variant.sku | default: product.selected_or_first_available_variant.id | default: product.id | json }},
+    {%- if product.selected_or_first_available_variant.weight != blank %}
+        "weight": "{{ product.selected_or_first_available_variant.weight | weight_with_unit | replace: " ", "" }}",
+    {%- endif -%}
+    "image": {
+      "@type": "ImageObject",
+      "url": "https:{{ product.featured_image | img_url: '1024x' }}",
+      "image": "https:{{ product.featured_image | img_url: '1024x' }}",
+      "name": {{ product.featured_image.alt | json }},
+      "width": "1024",
+      "height": "1024"
+    },{%- if ratingValue != blank and reviewCount != blank -%}
+    "aggregateRating": {
+        "@type": "AggregateRating",
+        "ratingValue": {{ ratingValue | json }},
+        "reviewCount": {{ reviewCount | json }}
+    },{%- endif -%}
+    "review": {
+      "@type": "Review",
+      "reviewBody": "Cool product!",
+      "author": {
+        "@type": "Person",
+        "givenName": "Lavender Tenorio"
+      },
+      "reviewRating": {
+        "@type": "Rating",
+        "ratingValue": 5,
+        "worstRating": 1,
+        "bestRating": 5
+      }
+    }
+}
+</script>
+
+{%- assign product_thumb_size = '180x' -%}
+{%- assign product_zoom_size = '1800x1800' -%}
+{%- assign product_image_size = '620x' -%}
+
+{% case image_container_width %}
+  {% when 'small' %}
+    {%- assign product_image_width = 'medium-up--two-fifths' -%}
+    {%- assign product_description_width = 'medium-up--three-fifths' -%}
+    {%- assign product_image_size = '480x' -%}
+  {% when 'medium' %}
+    {%- assign product_image_width = 'medium-up--one-half' -%}
+    {%- assign product_description_width = 'medium-up--one-half' -%}
+    {%- assign product_image_size = '620x' -%}
+  {% when 'large' %}
+    {%- assign product_image_width = 'medium-up--three-fifths' -%}
+    {%- assign product_description_width = 'medium-up--two-fifths' -%}
+    {%- assign product_image_size = '740x' -%}
+{% endcase %}

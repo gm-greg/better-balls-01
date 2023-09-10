@@ -1,0 +1,278 @@
+{% case section.settings.text_align %}
+    {% when 'left' %}
+        {% assign row_align = 'flex-start' %}
+        {% assign text_align = 'left' %}
+        {% assign col_align = 'flex-start'%}
+    {% when 'center' %}
+        {% assign row_align = 'center' %}
+        {% assign text_align = 'center' %}
+        {% assign col_align = 'center'%}
+
+    {% when 'right' %}
+        {% assign row_align = 'flex-end' %}
+        {% assign text_align = 'right' %}
+        {% assign col_align = 'flex-end'%}
+{% endcase %}
+
+{%- style -%}
+
+{% if section.settings.is_theme_font_style_used == true %}
+    {{section.settings.font_style | font_face}}{% endif %}
+
+
+.dg-container__{{section.id}}{
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media(min-width: 576px) {
+    .dg-container__{{section.id}}{
+        max-width: 540px;
+    }
+}
+
+@media(min-width: 768px) {
+    .dg-container__{{section.id}}{
+        max-width: 720px;
+    }
+}
+
+@media(min-width: 992px) {
+    .dg-container__{{section.id}}{
+        max-width: 960px;
+    }
+}
+
+@media(min-width: 1200px) {
+    .dg-container__{{section.id}}{
+        max-width: 1140px;
+    }
+}
+
+@media(min-width: 1400px) {
+    .dg-container__{{section.id}}{
+        max-width: 1320px;
+    }
+}
+.dg-row__{{section.id}}{
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: calc(var(--bs-gutter-y) * -1);
+    margin-right: calc(var(--bs-gutter-x) * -0.5);
+    margin-left: calc(var(--bs-gutter-x) * -0.5);
+}
+.dg-row__{{section.id}}> * {
+    box-sizing: border-box;
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 100%;
+    padding-right: calc(var(--bs-gutter-x) * 0.5);
+    padding-left: calc(var(--bs-gutter-x) * 0.5);
+    margin-top: var(--bs-gutter-y);
+}
+
+.dg-justify-content__{{section.id}}{
+    justify-content: {{row_align}};
+}
+
+@media(min-width: 576px) {
+    .dg-col-sm-9__{{section.id}}{
+        flex: 0 0 auto;
+        width: 75%;
+    }
+}
+
+.about-section__{{section.id}}{
+    padding-top: {{section.settings.section_padding_top}}px;
+    padding-bottom: {{section.settings.section_padding_bottom}}px;
+    {% if section.settings.is_theme_font_style_used == true %}
+        font-family: {{section.settings.font_style.family}};
+    {% endif %}
+    color: {{section.settings.text_color}};
+    background-color: {{section.settings.section_background_color}};
+}
+
+.text__{{section.id}}{
+    text-align: {{text_align}};
+    font-size: {{section.settings.text_font_size}}px;
+}
+
+.text__{{section.id}} > p {
+    margin: 0;
+    color: {{section.settings.text_color}};
+}
+
+@media(max-width: 576px) {
+    .about-section__{{section.id}}{
+        padding-top: {{section.settings.section_padding_top_mobile}}px;
+        padding-bottom: {{section.settings.section_padding_bottom_mobile}}px;
+    }
+
+    .text__{{section.id}}{
+        font-size: {{section.settings.text_font_size_mobile}}px;
+    }
+}
+
+{%- endstyle -%}
+
+{%-style-%}
+
+{{section.settings.custom_css}}
+
+{%-endstyle-%}
+
+<div class="about-section__{{section.id}}">
+  <div class="dg-container__{{section.id}}">
+    {%if section.settings.description_text != blank%}
+      <div class="dg-row__{{section.id}} dg-justify-content__{{section.id}}">
+        <div class="dg-col-sm-9__{{section.id}}">
+          <div class="text__{{section.id}}">
+            {{ section.settings.description_text }}
+          </div>
+        </div>
+      </div>
+    {%endif%}
+  </div>
+</div>
+
+{% schema %}
+
+{
+    "name": "Dingo-About-5",
+    "tag": "section",
+    "class": "spaced-section spaced-section--full-width",
+    "settings": [
+        {
+            "type": "header",
+            "content": "Main settings"
+        }, {
+            "type": "richtext",
+            "id": "description_text",
+            "default": "<p>According to one legend, ancestors of today's Oromo people in a region of Kaffa in Ethiopia were the first to recognize the energizing effect of the coffee plant. However, no direct evidence that has been found earlier than the 15th century indicating who among the African populations used it as a stimulant, or where coffee was first cultivated.</p>",
+            "label": "Description text"
+        },
+        {
+            "type": "header",
+            "content": "Common text settings"
+        }, {
+            "type": "checkbox",
+            "id": "is_theme_font_style_used",
+            "default": false,
+            "label": "Override default font"
+        }, {
+            "type": "font_picker",
+            "id": "font_style",
+            "default": "roboto_n4",
+            "label": "Font style",
+            "info": "CAUTION: Custom fonts might cause slower load times. If you would like to use a custom font please enable 'Override default font'"
+        }, {
+            "type": "color",
+            "id": "text_color",
+            "label": "Text color",
+            "default": "#000000"
+        },
+        
+        {
+            "type": "header",
+            "content": "Text settings"
+        }, {
+            "type": "radio",
+            "id": "text_align",
+            "label": "Text alignment",
+            "options": [
+                {
+                    "value": "left",
+                    "label": "Left"
+                }, {
+                    "value": "center",
+                    "label": "Center"
+                }, {
+                    "value": "right",
+                    "label": "Right"
+                }
+            ],
+            "default": "center"
+        }, {
+            "type": "range",
+            "id": "text_font_size",
+            "min": 10,
+            "max": 40,
+            "step": 1,
+            "unit": "px",
+            "label": "Text font size",
+            "default": 30
+        }, {
+            "type": "range",
+            "id": "text_font_size_mobile",
+            "min": 10,
+            "max": 40,
+            "step": 1,
+            "unit": "px",
+            "label": "Text font size (mobile)",
+            "default": 22
+        }, {
+            "type": "header",
+            "content": "Layout settings"
+        }, {
+            "type": "color",
+            "id": "section_background_color",
+            "label": "Section background color",
+            "default": "#f0f0f0"
+        }, {
+            "type": "range",
+            "id": "section_padding_top",
+            "min": 60,
+            "max": 200,
+            "step": 10,
+            "unit": "px",
+            "label": "Section top padding",
+            "default": 180
+        }, {
+            "type": "range",
+            "id": "section_padding_bottom",
+            "min": 60,
+            "max": 200,
+            "step": 10,
+            "unit": "px",
+            "label": "Section bottom padding",
+            "default": 180
+        }, {
+            "type": "range",
+            "id": "section_padding_top_mobile",
+            "min": 60,
+            "max": 200,
+            "step": 10,
+            "unit": "px",
+            "label": "Section top padding (mobile)",
+            "default": 120
+        }, {
+            "type": "range",
+            "id": "section_padding_bottom_mobile",
+            "min": 60,
+            "max": 200,
+            "step": 10,
+            "unit": "px",
+            "label": "Section bottom padding (mobile)",
+            "default": 120
+        }, {
+            "type": "header",
+            "content": "Custom settings"
+        }, {
+            "type": "textarea",
+            "id": "custom_css",
+            "label": "Custom CSS"
+        }
+    ],
+    "presets": [
+        {
+            "name": "Dingo-About-5"
+        }
+    ]
+}
+
+{% endschema %}

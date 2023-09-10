@@ -1,0 +1,284 @@
+{%- style -%}
+
+.dg-container-fluid__{{section.id}}{
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+.dg-row__{{section.id}}{
+    --bs-gutter-x: 15px;
+    --bs-gutter-y: 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: calc(var(--bs-gutter-y) * -1);
+    margin-right: calc(var(--bs-gutter-x) * -0.5);
+    margin-left: calc(var(--bs-gutter-x) * -0.5);
+}
+.dg-row__{{section.id}}> * {
+    box-sizing: border-box;
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 100%;
+    padding-right: calc(var(--bs-gutter-x) * 0.5);
+    padding-left: calc(var(--bs-gutter-x) * 0.5);
+    margin-top: var(--bs-gutter-y);
+}
+
+.dg-justify-content__{{section.id}}{
+    justify-content: center;
+}
+
+@media(min-width: 576px) {
+    .dg-col-sm-4__{{section.id}}{
+        flex: 0 0 auto;
+        width: 33.33333333%;
+    }
+
+    .dg-col-sm-8__{{section.id}}{
+        flex: 0 0 auto;
+        width: 66.66666667%;
+    }
+}
+
+.gallery-section__{{section.id}}{
+    padding-top: {{section.settings.section_padding_top}}px;
+    padding-bottom: {{section.settings.section_padding_bottom}}px;
+    {% if section.settings.is_theme_font_style_used == true %}
+        font-family: {{section.settings.font_style.family}};
+    {% endif %}
+    color: {{section.settings.text_color}};
+    background-color: {{section.settings.section_background_color}};
+}
+
+.image-column-up__{{section.id}} {
+	margin-bottom: 15px;
+}
+
+.image-up__{{section.id}}{
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+.image-down__{{section.id}} {
+    width: 100%;
+    height: 100%;
+    object-fit: cover;
+}
+
+@media(max-width: 576px) {
+    .gallery-section__{{section.id}}{
+        padding-top: {{section.settings.section_padding_top_mobile}}px;
+        padding-bottom: {{section.settings.section_padding_bottom_mobile}}px;
+    }
+
+	.image-up__{{section.id}}{
+		height: auto;
+	}
+	
+	.image-down__{{section.id}} {
+		height: auto;
+	}
+
+	.image-column-up__{{section.id}} {
+		margin-bottom: 0px;
+	}
+}
+
+{%- endstyle -%}
+
+{%-style-%}
+
+{{section.settings.custom_css}}
+
+{%-endstyle-%}
+
+<div class="gallery-section__{{section.id}}">
+  <div class="dg-container-fluid__{{section.id}}">
+    <div class="dg-row__{{section.id}} dg-justify-content__{{section.id}} image-column-up__{{section.id}}">
+      <div class="dg-col-sm-8__{{section.id}}">
+        {% if section.settings.image_1 == blank %}
+          <img src="https://cdn.shopify.com/s/files/1/0567/3399/1064/files/scott-webb-5IsdIqwwNP4-unsplash.jpg"
+            class="image-up__{{section.id}}"
+            loading="lazy"
+            sizes="(min-width: 1100px) 1100px, (min-width: 750px) 750px"
+          />
+        {% else %}
+          <img srcset="{%- if section.settings.image_1.width >= 165 -%}{{ section.settings.image_1 | img_url: '165x' }} 165w,{%- endif -%}
+            {%- if section.settings.image_1.width >= 360 -%}{{ section.settings.image_1 | img_url: '360x' }} 360w,{%- endif -%}
+            {%- if section.settings.image_1.width >= 535 -%}{{ section.settings.image_1 | img_url: '535x' }} 535w,{%- endif -%}
+            {%- if section.settings.image_1.width >= 720 -%}{{ section.settings.image_1 | img_url: '720x' }} 720w,{%- endif -%}
+            {%- if section.settings.image_1.width >= 940 -%}{{ section.settings.image_1 | img_url: '940x' }} 940w,{%- endif -%}
+            {%- if section.settings.image_1.width >= 1070 -%}{{ section.settings.image_1 | img_url: '1070x' }} 1070w{%- endif -%}"
+            src="{{ section.settings.image_1 | img_url: '525x' }}"
+            class="image-up__{{section.id}}"
+            sizes="(min-width: 1100px) 1100px, (min-width: 750px) 750px"
+            alt="{{ section.settings.image_1.alt | escape }}"
+            loading="lazy"
+          >
+        {% endif %}
+      </div>
+      <div class="dg-col-sm-4__{{section.id}}">
+        {% if section.settings.image_2 == blank %}
+          <img src="https://cdn.shopify.com/s/files/1/0567/3399/1064/files/andrew-donovan-valdivia-ZW_TNzH1KiA-unsplash.jpg"
+            class="image-up__{{section.id}}"
+            loading="lazy"
+            sizes="(min-width: 1100px) 1100px, (min-width: 750px) 750px"
+            width="100%"
+            height="100%"
+          />
+        {% else %}
+          <img srcset="{%- if section.settings.image_2.width >= 165 -%}{{ section.settings.image_2 | img_url: '165x' }} 165w,{%- endif -%}
+            {%- if section.settings.image_2.width >= 360 -%}{{ section.settings.image_2 | img_url: '360x' }} 360w,{%- endif -%}
+            {%- if section.settings.image_2.width >= 535 -%}{{ section.settings.image_2 | img_url: '535x' }} 535w,{%- endif -%}
+            {%- if section.settings.image_2.width >= 720 -%}{{ section.settings.image_2 | img_url: '720x' }} 720w,{%- endif -%}
+            {%- if section.settings.image_2.width >= 940 -%}{{ section.settings.image_2 | img_url: '940x' }} 940w,{%- endif -%}
+            {%- if section.settings.image_2.width >= 1070 -%}{{ section.settings.image_2 | img_url: '1070x' }} 1070w{%- endif -%}"
+            src="{{ section.settings.image_2 | img_url: '525x' }}"
+            class="image-up__{{section.id}}"
+            sizes="(min-width: 1100px) 1100px, (min-width: 750px) 750px"
+            alt="{{ section.settings.image_2.alt | escape }}"
+            loading="lazy"
+          >
+        {% endif %}
+      </div>
+    </div>
+    <div class="dg-row__{{section.id}} dg-justify-content__{{section.id}}">
+      <div class="dg-col-sm-4__{{section.id}}">
+        {% if section.settings.image_3 == blank %}
+          <img src="https://cdn.shopify.com/s/files/1/0567/3399/1064/files/x-N4QTBfNQ8Nk-unsplash.jpg"
+            class="image-down__{{section.id}}"
+            loading="lazy"
+            sizes="(min-width: 1100px) 1100px, (min-width: 750px) 750px"
+          />
+        {% else %}
+          <img srcset="{%- if section.settings.image_3.width >= 165 -%}{{ section.settings.image_3 | img_url: '165x' }} 165w,{%- endif -%}
+            {%- if section.settings.image_3.width >= 360 -%}{{ section.settings.image_3 | img_url: '360x' }} 360w,{%- endif -%}
+            {%- if section.settings.image_3.width >= 535 -%}{{ section.settings.image_3 | img_url: '535x' }} 535w,{%- endif -%}
+            {%- if section.settings.image_3.width >= 720 -%}{{ section.settings.image_3 | img_url: '720x' }} 720w,{%- endif -%}
+            {%- if section.settings.image_3.width >= 940 -%}{{ section.settings.image_3 | img_url: '940x' }} 940w,{%- endif -%}
+            {%- if section.settings.image_3.width >= 1070 -%}{{ section.settings.image_3 | img_url: '1070x' }} 1070w{%- endif -%}"
+            src="{{ section.settings.image_3 | img_url: '525x' }}"
+            class="image-down__{{section.id}}"
+            sizes="(min-width: 1100px) 1100px, (min-width: 750px) 750px"
+            alt="{{ section.settings.image_3.alt | escape }}"
+            loading="lazy"
+          >
+        {% endif %}
+      </div>
+      <div class="dg-col-sm-8__{{section.id}}">
+        {% if section.settings.image_4 == blank %}
+          <img src="https://cdn.shopify.com/s/files/1/0567/3399/1064/files/josh-nuttall-uNQ-TTg_qNY-unsplash.jpg"
+            class="image-down__{{section.id}}"
+            loading="lazy"
+            sizes="(min-width: 1100px) 1100px, (min-width: 750px) 750px"
+          />
+        {% else %}
+          <img srcset="{%- if section.settings.image_4.width >= 165 -%}{{ section.settings.image_4 | img_url: '165x' }} 165w,{%- endif -%}
+            {%- if section.settings.image_4.width >= 360 -%}{{ section.settings.image_4 | img_url: '360x' }} 360w,{%- endif -%}
+            {%- if section.settings.image_4.width >= 535 -%}{{ section.settings.image_4 | img_url: '535x' }} 535w,{%- endif -%}
+            {%- if section.settings.image_4.width >= 720 -%}{{ section.settings.image_4 | img_url: '720x' }} 720w,{%- endif -%}
+            {%- if section.settings.image_4.width >= 940 -%}{{ section.settings.image_4 | img_url: '940x' }} 940w,{%- endif -%}
+            {%- if section.settings.image_4.width >= 1070 -%}{{ section.settings.image_4 | img_url: '1070x' }} 1070w{%- endif -%}"
+            src="{{ section.settings.image_4 | img_url: '525x' }}"
+            class="image-down__{{section.id}}"
+            sizes="(min-width: 1100px) 1100px, (min-width: 750px) 750px"
+            alt="{{ section.settings.image_4.alt | escape }}"
+            loading="lazy"
+          >
+        {% endif %}
+      </div>
+    </div>
+  </div>
+</div>
+
+{% schema %}
+
+{
+    "name": "Dingo-Gallery-7",
+    "tag": "section",
+    "class": "spaced-section spaced-section--full-width",
+    "settings": [
+        {
+            "type": "header",
+            "content": "Main settings"
+        },{
+            "type": "image_picker",
+            "id": "image_1",
+            "label": "1 image"
+        }, {
+            "type": "image_picker",
+            "id": "image_2",
+            "label": "2 image"
+        }, {
+            "type": "image_picker",
+            "id": "image_3",
+            "label": "3 image"
+        },{
+            "type": "image_picker",
+            "id": "image_4",
+            "label": "4 image"
+        }, {
+            "type": "header",
+            "content": "Layout settings"
+        }, {
+            "type": "color",
+            "id": "section_background_color",
+            "label": "Section background color",
+            "default": "#ffffff"
+        }, {
+            "type": "range",
+            "id": "section_padding_top",
+            "min": 0,
+            "max": 100,
+            "step": 10,
+            "unit": "px",
+            "label": "Section top padding",
+            "default": 20
+        }, {
+            "type": "range",
+            "id": "section_padding_bottom",
+            "min": 0,
+            "max": 100,
+            "step": 10,
+            "unit": "px",
+            "label": "Section bottom padding",
+            "default": 20
+        }, {
+            "type": "range",
+            "id": "section_padding_top_mobile",
+            "min": 0,
+            "max": 100,
+            "step": 10,
+            "unit": "px",
+            "label": "Section top padding (mobile)",
+            "default": 20
+        }, {
+            "type": "range",
+            "id": "section_padding_bottom_mobile",
+            "min": 0,
+            "max": 100,
+            "step": 10,
+            "unit": "px",
+            "label": "Section bottom padding (mobile)",
+            "default": 20
+        }, {
+            "type": "header",
+            "content": "Custom settings"
+        }, {
+            "type": "textarea",
+            "id": "custom_css",
+            "label": "Custom CSS"
+        }
+    ],
+    "presets": [
+        {
+            "name": "Dingo-Gallery-7"
+        }
+    ]
+}
+
+{% endschema %}

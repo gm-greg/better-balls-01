@@ -1,0 +1,326 @@
+{% if section.settings.upsellenable %}
+<style>
+  /*! CSS Used from: Embedded */
+
+select,button{font-size:1rem;font-family:inherit;}
+/*! CSS Used from: Embedded */
+.eGyTOX{position:fixed;display:flex;-webkit-box-align:center;align-items:center;-webkit-box-pack:center;justify-content:center;z-index:1000000;left:0px;top:0px;width:100%;height:100%;overflow:auto;background-color:rgba(0, 0, 0, 0.6);}
+.jIZlcK{position:relative;background-color: rgb(255, 255, 255);padding-bottom:20px;margin:20px;box-shadow:rgba(0, 0, 0, 0.2) 0px 4px 6px 0px;color:rgb(17, 17, 17);border-radius:0.4rem;overflow:hidden;}
+@media only screen and (min-width: 1000px){
+.jIZlcK{min-width:800px;}
+}
+.iXbiHe{position:absolute;top:15px;right:15px;width:20px;height:20px;background:none;border:none;cursor:pointer;display:flex;-webkit-box-align:center;align-items:center;-webkit-box-pack:center;justify-content:center;}
+.iXbiHe svg{flex:0 0 auto;}
+.iXbiHe:not([disabled]):hover{transition:all 0.3s ease 0s;color:rgb(102, 102, 102);}
+  .hECcAj{font-size:24px;font-weight:600;/* margin:30px 10px; */text-align:center;background: {{section.settings.upsellcolor}};padding: 17px;color: white;}
+.hJzwzj{max-height:calc(100vh - 230px);overflow:scroll;padding-bottom:10px;overflow-x: hidden;}
+.eAKqMu{display:flex;-webkit-box-align:center;align-items:center;background: {{section.settings.upsellcolor}}26;border-top:1px solid rgb(216, 216, 216);border-bottom:1px solid rgb(216, 216, 216);padding:15px 10px;color: #a6a1a1;}
+@media only screen and (min-width: 600px){
+.eAKqMu{padding:15px 20px 15px 40px;}
+}
+.eAWpig{position:relative;flex:0 0 auto;display:inline-block;padding:1px;background:rgb(245, 245, 245);border:1px solid rgb(216, 216, 216);}
+.eAWpig img{display:block;width:46px;height:46px;object-fit:cover;}
+.iEnxFK{position:absolute;top:-7px;right:-8px;width:18px;height:18px;border-radius:50%;display:block;stroke-width:5;stroke:rgb(255, 255, 255);stroke-miterlimit:10;box-shadow:rgb(80, 184, 60) 0px 0px 0px inset;animation:0.4s ease-in-out 0.4s 1 normal forwards running animated-checkmark-fill, 0.3s ease-in-out 0.9s 1 normal both running animated-checkmark-scale;}
+.iEnxFK .checkmark__circle{stroke-dasharray:166;stroke-dashoffset:166;stroke-width:2;stroke-miterlimit:10;stroke:rgb(80, 184, 60);fill:none;animation:0.6s cubic-bezier(0.65, 0, 0.45, 1) 0s 1 normal forwards running animated-checkmark-stroke;}
+.iEnxFK .checkmark__check{transform-origin:50% 50%;stroke-dasharray:48;stroke-dashoffset:48;animation:0.3s cubic-bezier(0.65, 0, 0.45, 1) 0.8s 1 normal forwards running animated-checkmark-stroke;}
+.kHAjCl{margin:0px 16px;flex:1 1 0%;}
+.cxuouB{font-size:16px;font-weight:600;}
+@media only screen and (min-width: 600px){
+.cxuouB{margin:0px 16px;}
+}
+.glhYGg{list-style:none;margin:15px 10px;padding:0px;}
+@media only screen and (max-width: 600px){
+.glhYGg li:not(:last-child){border-bottom:1px solid rgb(216, 216, 216);padding-bottom:10px;margin-bottom:10px;}
+}
+@media only screen and (min-width: 600px){
+.glhYGg{margin:0px 0px 0px 60px;}
+.glhYGg li{margin:0px;padding:14px 0px;border-left:1px solid rgb(216, 216, 216);position:relative;}
+.glhYGg li:last-child{border-left:none;}
+.glhYGg li::before{position:absolute;bottom:50%;height:50%;width:50px;border-bottom:1px solid rgb(216, 216, 216);content:"";display:inline-block;}
+.glhYGg li:last-child::before{border-left:1px solid rgb(216, 216, 216);}
+.glhYGg li:empty{display:none;}
+}
+.jEVaUZ{display:flex;flex-wrap:wrap;-webkit-box-align:center;align-items:center;}
+@media only screen and (min-width: 600px){
+.jEVaUZ{display:inline-flex;width:calc(100% - 49px);margin:0px 0px 0px 50px;padding-right:20px;}
+}
+.jEVaUZ .Offer-Description{flex:1 1 0%;-webkit-box-flex:1;margin:0px 16px;}
+.jEVaUZ .Offer-Description-Content{display:flex;-webkit-box-align:center;align-items:center;margin:2px 0px;}
+.cIgYYX{flex:0 0 auto;display:inline-flex;-webkit-box-align:center;align-items:center;-webkit-box-pack:center;justify-content:center;width:50px;height:50px;background:rgb(245, 245, 245);border-radius:4px;}
+.cIgYYX img{width:100%;height:100%;object-fit:contain;}
+.cIgYYX img{cursor:pointer;transition:opacity 0.3s ease 0s;}
+.cIgYYX img:hover{opacity:0.7;}
+.lalnlD{border-top:1px solid rgb(216, 216, 216);display:flex;-webkit-box-pack:end;justify-content:flex-end;padding:20px 20px 0px;}
+.dyvnHt{padding:6px 14px;width:100%;margin:0px 4px;/* border-radius:3px; */background: {{section.settings.upsellcolor}} !important;border:none;color:rgb(0, 0, 0);font-weight:600;line-height:1.2;display:flex;-webkit-box-align:center;align-items:center;-webkit-box-pack:center;justify-content:center;border-radius: 5px !important;}
+@media only screen and (min-width: 600px){
+.dyvnHt{width:initial;margin:0px 10px;}
+}
+.dyvnHt:not([disabled]){cursor:pointer;}
+.dyvnHt:not([disabled]):hover{background-color:{{section.settings.upsellcolor}}26 !important;color:rgb(0, 0, 0);}
+.dyvnHt:disabled{background-color:rgba(119, 200, 140, 0.1);color:rgb(0, 0, 0);border:none;opacity:0.6;}
+.dyvnHt svg{margin:0px 0px 0px 10px;width:7px;}
+.dyvnHt:not([disabled]):hover{transition:all 0.3s ease 0s;/* background: #ff8fa0; */color:rgb(0, 0, 0);}
+.Button-Add,.Button-Primary,select{/* border-radius:0px!important; */}
+.Button-Add,.Button-Primary{color:white!important;}
+.Button-Add:hover{opacity:0.6!important;}
+.Button-Add{background-color:rgb(0, 0, 0)!important;border-radius: 5px !important;}
+.Button-Primary:hover{/* background-color:rgb(98, 191, 84)!important; */}
+.irilpd{position:relative;}
+.fnSXAl{display:inline-block;max-width:calc(100vw - 150px);vertical-align:bottom;text-overflow:ellipsis;white-space:nowrap;overflow:hidden;font-weight:600;margin-right:4px;line-height:1.2;cursor:pointer;transition:opacity 0.3s ease 0s;}
+.fnSXAl:hover{opacity:0.7;}
+@media only screen and (min-width: 1000px){
+.fnSXAl{max-width:30rem;}
+}
+.gGymQM{display:inline-block;line-height:1.2;vertical-align:bottom;}
+.eGqAuY{text-decoration:line-through;margin-right:4px;color:rgb(143, 143, 143);}
+.ZmQjD{margin-right:4px;}
+.ikxTmh{margin:8px 0px 4px;display:flex;}
+@media only screen and (max-width: 600px){
+.ikxTmh{width:100%;}
+.ikxTmh > :first-child{margin-right:10px;}
+}
+.hPKPWG{padding:4px 28px 4px 14px;width:100%;min-width:70px;margin:0px 4px;color:rgb(51, 51, 51);border-radius:3px;border:1px solid rgb(192, 229, 201);-webkit-appearance:none;background-image:url(https://candyrack.rousek.name/static/media/select.fa731aa9.svg);background-repeat:no-repeat;background-position:right 10px center;background-color:rgb(255, 255, 255);}
+@media only screen and (min-width: 600px){
+.hPKPWG{width:initial;margin:0px 10px;}
+}
+.hPKPWG:not([disabled]){cursor:pointer;}
+.hPKPWG:not([disabled]):hover{background-color:rgba(119, 200, 140, 0.1);color:rgb(0, 0, 0);}
+.hPKPWG:disabled{background-color:rgba(119, 200, 140, 0.1);color:rgb(0, 0, 0);border:none;opacity:0.6;}
+.cmprprc {color: #cccccc;text-decoration: line-through;margin-right: 5px;}
+</style>
+<div class="frame-content" id="upsellstuff" style="display:none;">
+   <div class="sc-gzVnrw eGyTOX">
+      <div class="OfferId-4832 Target-Product-Id-1740819103790 sc-bZQynM jIZlcK">
+         <button class="sc-ifAKCX iXbiHe" id="upsellclose">
+            <svg viewBox="0 0 12 12" width="12" height="12" fill="currentColor" version="1.1" xmlns="http://www.w3.org/2000/svg">
+               <line x1="1" y1="11" x2="11" y2="1" stroke="currentColor" stroke-width="2"></line>
+               <line x1="1" y1="1" x2="11" y2="11" stroke="currentColor" stroke-width="2"></line>
+            </svg>
+         </button>
+         <div class="Title sc-cMljjf hECcAj">{{section.settings.upselltitle}}</div>
+         <div class="Main-Content sc-jDwBTQ hJzwzj">
+           {% for item in cart.items %}
+           
+		
+            <div class="Product-Line sc-eNQAEJ eAKqMu">
+               <span class="sc-hMqMXs eAWpig">
+                  <img src="{{ item | img_url: '100x100' }}" alt="Product">
+                  <svg class="sc-bdVaJa iEnxFK" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 52 52">
+                     <circle class="checkmark__circle" cx="26" cy="26" r="25" fill="none"></circle>
+                     <path class="checkmark__check" fill="none" d="M14.1 27.2l7.1 7.2 16.7-16.8"></path>
+                  </svg>
+               </span>
+               <div class="Product-Name sc-kEYyzF kHAjCl"> {{ item.product.title }}</div>
+               <span class="Product-Price sc-gqjmRU cxuouB">{{ item.line_price | money }}</span>
+            </div>
+           {% endfor %}
+            <ul class="sc-ckVGcZ glhYGg">
+               <div class="sc-kkGfuU krhhIy">
+                  {%- for block in section.blocks -%}
+                 {%- if block.type == 'block-1' -%}
+                 {%- assign product_offer = all_products[block.settings.nerdly_upsell_popup_product_offer] -%}
+                  <li class="Product-Id-1886253613102">
+                     <div data-cy="offer-product" class="sc-cSHVUG jEVaUZ">
+                       
+                        <div class="sc-gZMcBi irilpd"><span class="sc-dnqmqq cIgYYX">
+                         
+                        {% for variant in product_offer.variants %}
+                  
+          {% assign vid = variant.id %}
+                    
+                      {% endfor %}
+                    
+                          
+                        
+                            {%- assign image = product_offer.featured_image -%}
+                          
+  
+                          <img src="{{ image | img_url: "100x100" }}" alt="Product">
+                           
+                     
+                      
+
+                          </span></div>
+                        <div class="Offer-Description">
+                           <div>
+                              <div>
+                                 <span class="Offer-Description-Heading">
+                                    <span title="PREMIUM GIFT BOX," class="Offer-Title sc-kgoBCf fnSXAl">{{ product_offer.title}}</span>
+                                   <div class="Offer-Prices sc-fjdhpX gGymQM"><span class="Offer-Price-Before-Discount sc-jTzLTM eGqAuY"></span>{% if product_offer.price < product_offer.compare_at_price %} <span class="cmprprc">{{ product_offer.compare_at_price | money }}</span>{% endif %}<span class="Offer-Price sc-EHOje ZmQjD">{{ product_offer.price | money }}</span></div>
+                                 </span>
+                                 <p class="Offer-Description-Content"></p>
+                              </div>
+                           </div>
+                        </div>
+                        <div class="sc-bxivhb ikxTmh">
+                          
+                           
+                          <button data-cy="add" class="sc-htpNat Button-Add  sc-jzJRlG dyvnHt" style="padding-left: 7px;" id="{{block.id}}-{{vid}}"  >
+                              <svg viewBox="0 0 100 100" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink" style="width: 15px; margin: 0px 4px 0px 0px;">
+                                 <title>icon_5</title>
+                                 <desc>Created with Sketch.</desc>
+                                 <defs></defs>
+                                 <g id="icon_5" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                                    <g id="noun_Plus_1347852" transform="translate(20.000000, 20.000000)" fill="currentColor" fill-rule="nonzero">
+                                       <path d="M5.5500129,24.3751613 L24.3751613,24.3751613 L24.3751613,5.5500129 C24.3751613,-1.8500043 35.6248387,-1.8500043 35.6248387,5.5500129 L35.6248387,24.3751613 L54.4499871,24.3751613 C61.8500043,24.3751613 61.8500043,35.6248387 54.4499871,35.6248387 L35.6248387,35.6248387 L35.6248387,54.4499871 C35.6248387,61.8500043 24.3751613,61.8500043 24.3751613,54.4499871 L24.3751613,35.6248387 L5.5500129,35.6248387 C-1.8500043,35.6248387 -1.8500043,24.3751613 5.5500129,24.3751613 Z" id="Shape"></path>
+                                    </g>
+                                 </g>
+                              </svg>
+                            <div id="{{vid}}-{{block.id}}">ADD</div>
+                           </button>
+                         
+                        </div>
+                     </div>
+                  </li>
+                 <script>
+      
+        
+    $(document).ready(function() {
+      
+      var id="{{ vid }}";
+      $("#{{block.id}}-{{vid}}").click(function(){
+
+        $.ajax({
+      type: 'POST',
+      url: '/cart/add.js',
+      dataType: 'json',
+      data: {id:id,quantity:1},
+          success: function(){
+        
+  $("#{{vid}}-{{block.id}}").append('ED');
+        $("#{{block.id}}-{{vid}}").attr('disabled', true);
+      }
+   });
+   
+     
+
+});
+ 
+      
+      });
+
+</script>
+                 {% endif %}
+                  {% endfor %}
+               </div>
+            </ul>
+         </div>
+         <div class="Footer sc-jAaTju lalnlD">
+            <button class="sc-htpNat Button-Primary sc-jzJRlG dyvnHt" id="continuebtn">
+               CONTINUE
+               <svg width="13px" height="24px" viewBox="0 0 13 24" version="1.1" xmlns:xlink="http://www.w3.org/1999/xlink">
+                  <title>noun_Next_880265</title>
+                  <desc>Created with Sketch.</desc>
+                  <g id="candyrack_draft-" stroke="none" stroke-width="1" fill="none" fill-rule="evenodd">
+                     <g id="Artboard-Copy-3" transform="translate(-1595.000000, -865.000000)" fill="currentColor" stroke="currentColor">
+                        <g id="Group-7" transform="translate(1416.000000, 838.000000)">
+                           <g id="noun_Next_880265" transform="translate(179.000000, 28.000000)">
+                              <polygon id="Path" points="1.54508197 0 0 1.43255814 9.96311475 11 0 20.5674419 1.54508197 22 13 11"></polygon>
+                           </g>
+                        </g>
+                     </g>
+                  </g>
+               </svg>
+            </button>
+         </div>
+      </div>
+   </div>
+</div>
+      <script>
+      
+        
+    $(document).ready(function() {
+      
+      
+      $("#upsellclose").click(function(){
+        
+        $('#upsellstuff').toggle( "slow" );
+      });
+      
+      
+      $("#continuebtn").click(function(){
+        var date = new Date();
+        var minutes = {{section.settings.cookietime}};
+ date.setTime(date.getTime() + (minutes * 60 * 1000));
+        Cookies.set('upsellpop', 'noshow', { expires: date })
+   location.reload();
+   });
+      
+         var my_cookie = Cookies.get('upsellpop'); 
+    if (my_cookie && my_cookie == "noshow") {
+       
+        console.log('Hiding Upsell');
+    }
+    else{
+    $('#upsellstuff').toggle( "slow" );
+       console.log('Upsell Show');
+
+    }
+      
+      });
+
+</script>
+{% endif %}
+
+{% schema %}
+{
+  "name": "Cart Upsell",
+  "class": "shopify-section--bordered",
+  "settings": [
+    {
+      "type": "checkbox",
+      "id": "upsellenable",
+      "label": "enable upsell",
+      "default": false
+    },
+{
+   "type": "text",
+   "id": "upselltitle",
+   "default": "order extras",
+   "label": "change the title for upsell window"
+},
+{
+   "type": "color",
+   "id": "upsellcolor",
+   "label": "upsell color",
+   "default": "#6fc4c4"
+},
+{
+   "type": "text",
+   "id": "cookietime",
+   "default": "1",
+   "label": "Set when cookie expires in minutes"
+}
+  ]
+,
+    "blocks":
+ [
+   {
+     "type": "block-1",
+     "name": "Upsell",
+     "settings": [
+       {
+        "type": "product",
+        "id": "nerdly_upsell_popup_product_offer",
+        "label": "Product offer"
+      }
+     ]
+   }
+   
+ ],
+
+  "presets": [
+    {
+      "category": "Cart Upsell",
+      "name": "Upsell in cart"
+    }
+  ]
+}
+
+{% endschema %}
+
+{% stylesheet %}
+{% endstylesheet %}
+
+{% javascript %}
+{% endjavascript %}

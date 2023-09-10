@@ -1,0 +1,18 @@
+{% section 'collection-header' %}
+
+<div id="CollectionAjaxResult" class="collection-content">
+  <div id="CollectionAjaxContent">
+    <div class="page-width">
+      <div class="grid">
+        <div class="grid__item medium-up--one-fifth grid__item--sidebar" style='background: {{settings.sidebarbg }};'>
+          {% section 'collection-sidebar' %}
+        </div>
+        <div class="grid__item medium-up--four-fifths grid__item--content">
+          {% section 'collection-promotions' %}
+          {% section 'smk_collection_blocks' %}<div class='smk-sections-above-content'></div>{% section 'collection-template' %}<div class='smk-sections-below-content'></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+<div class='smk-sections-above-footer'></div>

@@ -1,0 +1,507 @@
+{%- style -%}
+
+{% if section.settings.is_theme_font_style_used == true %}
+    {{section.settings.font_style | font_face}}{% endif %}
+
+{% comment %}
+    Grid system{% endcomment %}
+ .dg-container__{{section.id}}{
+    width: 100%;
+    padding-right: 15px;
+    padding-left: 15px;
+    margin-right: auto;
+    margin-left: auto;
+}
+
+@media(min-width: 576px) {
+    .dg-container__{{section.id}}{
+        max-width: 540px;
+    }
+}
+
+@media(min-width: 768px) {
+    .dg-container__{{section.id}}{
+        max-width: 720px;
+    }
+}
+
+@media(min-width: 992px) {
+    .dg-container__{{section.id}}{
+        max-width: 960px;
+    }
+}
+
+@media(min-width: 1200px) {
+    .dg-container__{{section.id}}{
+        max-width: 1140px;
+    }
+}
+
+@media(min-width: 1400px) {
+    .dg-container__{{section.id}}{
+        max-width: 1320px;
+    }
+}
+.dg-row__{{section.id}}{
+    --bs-gutter-x: 1.5rem;
+    --bs-gutter-y: 0;
+    display: flex;
+    flex-wrap: wrap;
+    margin-top: calc(var(--bs-gutter-y) * -1);
+    margin-right: calc(var(--bs-gutter-x) * -0.5);
+    margin-left: calc(var(--bs-gutter-x) * -0.5);
+}
+.dg-row__{{section.id}}> * {
+    box-sizing: border-box;
+    flex-shrink: 0;
+    width: 100%;
+    max-width: 100%;
+    padding-right: calc(var(--bs-gutter-x) * 0.5);
+    padding-left: calc(var(--bs-gutter-x) * 0.5);
+    margin-top: var(--bs-gutter-y);
+}
+
+@media(min-width: 576px) {
+    .dg-col-sm-4__{{section.id}}{
+        flex: 0 0 auto;
+        width: 33.33333333%;
+    }
+
+    .dg-col-sm-8__{{section.id}}{
+        flex: 0 0 auto;
+        width: 66.66666667%;
+    }
+}
+
+.dg-justify-content__{{section.id}}{
+    justify-content: center;
+}
+
+{% comment %}
+    End grid system{% endcomment %}
+ .contacts-section__{{section.id}}{
+    padding-top: {{section.settings.section_padding_top}}px;
+    padding-bottom: {{section.settings.section_padding_bottom}}px;
+    {% if section.settings.is_theme_font_style_used == true %}
+        font-family: {{section.settings.font_style.family}};
+    {% endif %}
+    color: {{section.settings.text_color}};
+    background-color: {{section.settings.section_background_color}};
+}
+
+.title__{{section.id}}{
+    margin-bottom: {{section.settings.title_margin_bottom}}px;
+    text-align: center;
+    font-size: {{section.settings.title_font_size}}px;
+    font-weight: {{section.settings.title_font_weight}};
+    font-style: {{section.settings.title_font_style}};
+}
+
+.contact_info__{{section.id}}{
+    text-align: center;
+    font-size: {{section.settings.contact_font_size}}px;
+}
+
+.contact_info__{{section.id}}> p {
+    margin: 0;
+    color: {{section.settings.text_color}};
+}
+
+.address__{{section.id}} {
+    font-size: {{section.settings.address_font_size}}px;
+
+    text-align: center;
+    margin-top: 35px;
+}
+
+.address__{{section.id}} > p {
+    margin: 0;
+    color: {{section.settings.text_color}};
+}
+
+
+.link__{{section.id}}{
+    font-size: 0;
+    width: {{section.settings.button_size}}px;
+    height: {{section.settings.button_size}}px;
+    margin-left: 5px;
+    margin-right: 5px;
+}
+
+.facebook-link__{{section.id}}{
+    background-repeat: no-repeat;
+    background-image: url("data:image/svg+xml, %3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' fill='%23{{section.settings.button_background_color | replace_first: '#'}}' viewBox='0 0 48 48' enable-background='new 0 0 48 48' xml:space='preserve'%3E%3Cdesc%3EFacebook%3C/desc%3E%3Cpath d='M47.761, 24c0, 13.121-10.638, 23.76-23.758, 23.76C10.877, 47.76, 0.239, 37.121, 0.239, 24c0-13.124, 10.638-23.76, 23.764-23.76C37.123, 0.24, 47.761, 10.876, 47.761, 24 M20.033, 38.85H26.2V24.01h4.163l0.539-5.242H26.2v-3.083c0-1.156, 0.769-1.427, 1.308-1.427h3.318V9.168L26.258, 9.15c-5.072, 0-6.225, 3.796-6.225, 6.224v3.394H17.1v5.242h2.933V38.85z'%3E%3C/path%3E%3C/svg%3E");
+}
+
+.twitter-link__{{section.id}}{
+    background-repeat: no-repeat;
+    background-image: url("data:image/svg+xml, %3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' fill='%23{{section.settings.button_background_color | replace_first: '#'}}' viewBox='0 0 48 48' enable-background='new 0 0 48 48' xml:space='preserve'%3E%3Cdesc%3ETwitter%3C/desc%3E%3Cpath d='M47.762, 24c0, 13.121-10.639, 23.76-23.761, 23.76S0.24, 37.121, 0.24, 24c0-13.124, 10.639-23.76, 23.761-23.76 S47.762, 10.876, 47.762, 24 M38.031, 12.375c-1.177, 0.7-2.481, 1.208-3.87, 1.481c-1.11-1.186-2.694-1.926-4.455-1.926 c-3.364, 0-6.093, 2.729-6.093, 6.095c0, 0.478, 0.054, 0.941, 0.156, 1.388c-5.063-0.255-9.554-2.68-12.559-6.367 c-0.524, 0.898-0.825, 1.947-0.825, 3.064c0, 2.113, 1.076, 3.978, 2.711, 5.07c-0.998-0.031-1.939-0.306-2.761-0.762v0.077 c0, 2.951, 2.1, 5.414, 4.889, 5.975c-0.512, 0.14-1.05, 0.215-1.606, 0.215c-0.393, 0-0.775-0.039-1.146-0.109 c0.777, 2.42, 3.026, 4.182, 5.692, 4.232c-2.086, 1.634-4.712, 2.607-7.567, 2.607c-0.492, 0-0.977-0.027-1.453-0.084 c2.696, 1.729, 5.899, 2.736, 9.34, 2.736c11.209, 0, 17.337-9.283, 17.337-17.337c0-0.263-0.004-0.527-0.017-0.789 c1.19-0.858, 2.224-1.932, 3.039-3.152c-1.091, 0.485-2.266, 0.811-3.498, 0.958C36.609, 14.994, 37.576, 13.8, 38.031, 12.375'%3E%3C/path%3E%3C/svg%3E");
+}
+
+.instagram-link__{{section.id}}{
+    background-repeat: no-repeat;
+    background-image: url("data:image/svg+xml, %3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' fill='%23{{section.settings.button_background_color | replace_first: '#'}}' viewBox='0 0 30 30' xml:space='preserve'%3E%3Cdesc%3EInstagram%3C/desc%3E%3Cpath d='M15, 11.014 C12.801, 11.014 11.015, 12.797 11.015, 15 C11.015, 17.202 12.802, 18.987 15, 18.987 C17.199, 18.987 18.987, 17.202 18.987, 15 C18.987, 12.797 17.199, 11.014 15, 11.014 L15, 11.014 Z M15, 17.606 C13.556, 17.606 12.393, 16.439 12.393, 15 C12.393, 13.561 13.556, 12.394 15, 12.394 C16.429, 12.394 17.607, 13.561 17.607, 15 C17.607, 16.439 16.444, 17.606 15, 17.606 L15, 17.606 Z'%3E%3C/path%3E%3Cpath d='M19.385, 9.556 C18.872, 9.556 18.465, 9.964 18.465, 10.477 C18.465, 10.989 18.872, 11.396 19.385, 11.396 C19.898, 11.396 20.306, 10.989 20.306, 10.477 C20.306, 9.964 19.897, 9.556 19.385, 9.556 L19.385, 9.556 Z'%3E%3C/path%3E%3Cpath d='M15.002, 0.15 C6.798, 0.15 0.149, 6.797 0.149, 15 C0.149, 23.201 6.798, 29.85 15.002, 29.85 C23.201, 29.85 29.852, 23.202 29.852, 15 C29.852, 6.797 23.201, 0.15 15.002, 0.15 L15.002, 0.15 Z M22.666, 18.265 C22.666, 20.688 20.687, 22.666 18.25, 22.666 L11.75, 22.666 C9.312, 22.666 7.333, 20.687 7.333, 18.28 L7.333, 11.734 C7.333, 9.312 9.311, 7.334 11.75, 7.334 L18.25, 7.334 C20.688, 7.334 22.666, 9.312 22.666, 11.734 L22.666, 18.265 L22.666, 18.265 Z'%3E%3C/path%3E%3C/svg%3E");
+}
+
+.youtube-link__{{section.id}}{
+    background-repeat: no-repeat;
+    background-image: url("data:image/svg+xml, %3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' fill='%23{{section.settings.button_background_color | replace_first: '#'}}' viewBox='0 0 48 48' enable-background='new 0 0 48 48' xml:space='preserve'%3E%3Cdesc%3EYoutube%3C/desc%3E%3Cpath d='M24 0.0130005C37.248 0.0130005 47.987 10.753 47.987 24C47.987 37.247 37.247 47.987 24 47.987C10.753 47.987 0.0130005 37.247 0.0130005 24C0.0130005 10.753 10.752 0.0130005 24 0.0130005ZM35.815 18.093C35.565 16.756 34.452 15.758 33.173 15.635C30.119 15.439 27.054 15.28 23.995 15.278C20.936 15.276 17.882 15.432 14.828 15.625C13.544 15.749 12.431 16.742 12.182 18.084C11.898 20.017 11.756 21.969 11.756 23.92C11.756 25.871 11.898 27.823 12.182 29.756C12.431 31.098 13.544 32.21 14.828 32.333C17.883 32.526 20.935 32.723 23.995 32.723C27.053 32.723 30.121 32.551 33.173 32.353C34.452 32.229 35.565 31.084 35.815 29.747C36.101 27.817 36.244 25.868 36.244 23.919C36.244 21.971 36.101 20.023 35.815 18.093ZM21.224 27.435V20.32L27.851 23.878L21.224 27.435Z'%3E%3C/path%3E%3C/svg%3E");
+}
+
+.telegram-link__{{section.id}}{
+    background-repeat: no-repeat;
+    background-image: url("data:image/svg+xml, %3Csvg version='1.1' xmlns='http://www.w3.org/2000/svg' xmlns:xlink='http://www.w3.org/1999/xlink' fill='%23{{section.settings.button_background_color | replace_first: '#'}}' viewBox='0 0 60 60' xml:space='preserve'%3E%3Cdesc%3ETelegram%3C/desc%3E%3Cpath d='M30 0C13.4 0 0 13.4 0 30s13.4 30 30 30 30-13.4 30-30S46.6 0 30 0zm16.9 13.9l-6.7 31.5c-.1.6-.8.9-1.4.6l-10.3-6.9-5.5 5.2c-.5.4-1.2.2-1.4-.4L18 32.7l-9.5-3.9c-.7-.3-.7-1.5 0-1.8l37.1-14.1c.7-.2 1.4.3 1.3 1z'%3E%3C/path%3E%3Cpath d='M22.7 40.6l.6-5.8 16.8-16.3-20.2 13.3'%3E%3C/path%3E%3C/svg%3E");
+}
+
+.button-column__{{section.id}}{
+    margin-top: {{section.settings.icon_margin_top}}px;
+    display: flex;
+    justify-content: center;
+}
+
+@media(max-width: 576px) {
+    .contacts-section__{{section.id}}{
+        padding-top: {{section.settings.section_padding_top_mobile}}px;
+        padding-bottom: {{section.settings.section_padding_bottom_mobile}}px;
+    }
+
+    .title__{{section.id}}{
+        font-size: {{section.settings.title_font_size_mobile}}px;
+    }
+
+
+    .button-column__{{section.id}}{
+        margin-top: {{section.settings.icon_margin_top_mobile}}px;
+    }
+
+    .link__{{section.id}}{
+        max-width: 48px;
+        max-height: 48px;
+    }
+
+}
+
+{%- endstyle -%}
+
+{%-style-%}
+
+{{section.settings.custom_css}}
+
+{%-endstyle-%}
+
+<div class="contacts-section__{{section.id}}">
+  <div class="dg-container__{{section.id}}">
+    
+    <div class="dg-row__{{section.id}} dg-justify-content__{{section.id}}">
+      <div class="dg-col-sm-8__{{section.id}}">
+        <div class="title__{{section.id}}">
+          {{ section.settings.title_text | escape }}
+        </div>
+        {%if section.settings.phone !=blank %}<div class="contact_info__{{section.id}}">{{section.settings.phone}}</div>{%endif%}
+        {%if section.settings.email !=blank %}<div class="contact_info__{{section.id}}">{{section.settings.email}}</div>{%endif%}
+        {%if section.settings.address !=blank %}<div class="address__{{section.id}}">{{section.settings.address}}</div>{%endif%}
+      </div>
+    </div>
+    <div class="dg-row__{{section.id}} dg-justify-content__{{section.id}}">
+      <div class="dg-col-sm-4__{{section.id}} button-column__{{section.id}}">
+
+        {%if section.settings.facebook_link != blank%}
+        <a href="{{section.settings.facebook_link}}">
+          <div class="link__{{section.id}} facebook-link__{{section.id}}">facebook</div>
+        </a>
+        {%endif%}
+
+        {%if section.settings.twitter_link != blank%}
+        <a href="{{section.settings.twitter_link}}">
+          <div class="link__{{section.id}} twitter-link__{{section.id}}">twitter</div>
+        </a>
+        {%endif%}
+
+
+        {%if section.settings.instagram_link != blank%}
+        <a href="{{section.settings.instagram_link}}">
+          <div class="link__{{section.id}} instagram-link__{{section.id}}">instagram</div>
+        </a>
+        {%endif%}
+
+
+        {%if section.settings.youtube_link != blank%}
+        <a href="{{section.settings.youtube_link}}">
+          <div class="link__{{section.id}} youtube-link__{{section.id}}">youtube</div>
+        </a>
+        {%endif%}
+
+
+        {%if section.settings.telegram_link != blank%}
+        <a href="{{section.settings.telegram_link}}">
+          <div class="link__{{section.id}} telegram-link__{{section.id}}">telegram</div>
+        </a>
+        {%endif%}
+      </div>
+    </div>
+
+  </div>
+</div>
+
+{% schema %}
+
+{
+    "name": "Dingo-Contacts-1",
+    "tag": "section",
+    "class": "spaced-section spaced-section--full-width",
+    "settings": [
+        {
+            "type": "header",
+            "content": "Main settings"
+        }, {
+            "type": "text",
+            "id": "title_text",
+            "default": "Contact us:",
+            "label": "Title text"
+        }, {
+            "type": "richtext",
+            "id": "address",
+            "label": "Address",
+            "default": "<p>New York<br> 21 Wilson Street</p>"
+        }, {
+            "type": "richtext",
+            "id": "phone",
+            "label": "Phone",
+            "default": "<p>+1 123 456 78 90</p>"
+        }, {
+            "type": "richtext",
+            "id": "email",
+            "label": "Email",
+            "default": "<p>info@ourgreateshop.com</p>"
+        }, {
+            "type": "url",
+            "id": "facebook_link",
+            "label": "Facebook link",
+            "default": "/collections/all",
+            "info": "Leave the field blank to hide the social button."
+        }, {
+            "type": "url",
+            "id": "twitter_link",
+            "label": "Twitter link",
+            "default": "/collections/all",
+            "info": "Leave the field blank to hide the social button."
+        }, {
+            "type": "url",
+            "id": "instagram_link",
+            "label": "Instagram link",
+            "default": "/collections/all",
+            "info": "Leave the field blank to hide the social button."
+        }, {
+            "type": "url",
+            "id": "youtube_link",
+            "label": "Youtube link",
+            "info": "Leave the field blank to hide the social button."
+        }, {
+            "type": "url",
+            "id": "telegram_link",
+            "label": "Telegram link",
+            "info": "Leave the field blank to hide the social button."
+        },
+        {
+            "type": "header",
+            "content": "Common text settings"
+        }, {
+            "type": "checkbox",
+            "id": "is_theme_font_style_used",
+            "default": false,
+            "label": "Override default font"
+        }, {
+            "type": "font_picker",
+            "id": "font_style",
+            "default": "roboto_n4",
+            "label": "Font style",
+            "info": "CAUTION: Custom fonts might cause slower load times. If you would like to use a custom font please enable 'Override default font'"
+        }, {
+            "type": "color",
+            "id": "text_color",
+            "label": "Text color",
+            "default": "#000000"
+        },
+        
+        
+        
+        {
+            "type": "header",
+            "content": "Text settings"
+        }, {
+            "type": "range",
+            "id": "title_font_size",
+            "min": 30,
+            "max": 90,
+            "step": 1,
+            "unit": "px",
+            "label": "Title font size",
+            "default": 42
+        }, {
+            "type": "range",
+            "id": "title_font_size_mobile",
+            "min": 30,
+            "max": 90,
+            "step": 1,
+            "unit": "px",
+            "label": "Title font size (mobile)",
+            "default": 30
+        }, {
+            "type": "select",
+            "id": "title_font_weight",
+            "label": "Title font weight",
+            "options": [
+                {
+                    "value": "normal",
+                    "label": "normal"
+                }, {
+                    "value": "bold",
+                    "label": "bold"
+                }
+            ],
+            "default": "bold"
+        }, {
+            "type": "select",
+            "id": "title_font_style",
+            "label": "Title font style",
+            "options": [
+                {
+                    "value": "normal",
+                    "label": "normal"
+                }, {
+                    "value": "italic",
+                    "label": "italic"
+                }
+            ],
+            "default": "normal"
+        }, {
+            "type": "range",
+            "id": "title_margin_bottom",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Title margin bottom",
+            "default": 30
+        }, {
+            "type": "range",
+            "id": "contact_font_size",
+            "min": 10,
+            "max": 40,
+            "step": 1,
+            "unit": "px",
+            "label": "Contact font size",
+            "default": 26
+        }, {
+            "type": "range",
+            "id": "address_font_size",
+            "min": 10,
+            "max": 40,
+            "step": 1,
+            "unit": "px",
+            "label": "Address font size",
+            "default": 18
+        }, {
+            "type": "header",
+            "content": "Social link settings"
+        }, {
+            "type": "color",
+            "id": "button_background_color",
+            "label": "Icon color",
+            "default": "#000000"
+        }, {
+            "type": "select",
+            "id": "button_size",
+            "label": "Icon size",
+            "options": [
+                {
+                    "value": "30",
+                    "label": "small"
+                }, {
+                    "value": "48",
+                    "label": "medium"
+                }, {
+                    "value": "64",
+                    "label": "large"
+                }
+            ],
+            "default": "48"
+        }, {
+            "type": "range",
+            "id": "icon_margin_top",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Icons margin top",
+            "default": 35
+        }, {
+            "type": "range",
+            "id": "icon_margin_top_mobile",
+            "min": 0,
+            "max": 100,
+            "step": 1,
+            "unit": "px",
+            "label": "Icons margin top (mobile)",
+            "default": 35
+        }, {
+            "type": "header",
+            "content": "Layout settings"
+        }, {
+            "type": "color",
+            "id": "section_background_color",
+            "label": "Section background color",
+            "default": "#ffffff"
+        }, {
+            "type": "range",
+            "id": "section_padding_top",
+            "min": 60,
+            "max": 200,
+            "step": 10,
+            "unit": "px",
+            "label": "Section top padding",
+            "default": 150
+        }, {
+            "type": "range",
+            "id": "section_padding_bottom",
+            "min": 60,
+            "max": 200,
+            "step": 10,
+            "unit": "px",
+            "label": "Section bottom padding",
+            "default": 150
+        }, {
+            "type": "range",
+            "id": "section_padding_top_mobile",
+            "min": 60,
+            "max": 200,
+            "step": 10,
+            "unit": "px",
+            "label": "Section top padding (mobile)",
+            "default": 90
+        }, {
+            "type": "range",
+            "id": "section_padding_bottom_mobile",
+            "min": 60,
+            "max": 200,
+            "step": 10,
+            "unit": "px",
+            "label": "Section bottom padding (mobile)",
+            "default": 90
+        }, {
+            "type": "header",
+            "content": "Custom settings"
+        }, {
+            "type": "textarea",
+            "id": "custom_css",
+            "label": "Custom CSS"
+        }
+    ],
+    "presets": [
+        {
+            "name": "Dingo-Contacts-1"
+        }
+    ]
+}
+
+{% endschema %}

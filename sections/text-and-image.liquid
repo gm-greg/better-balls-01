@@ -1,0 +1,461 @@
+{% if section.settings.divider %}<div class="section--divider">{% endif %}
+   {% if section.settings.landimgfilter == 'blur' %}
+  {% assign filter = 'blur' %}
+  {% assign val = 'px)' %}
+  {% else %}
+ {% if section.settings.landimgfilter =='brightness' %}
+  {% assign filter = 'brightness' %}
+  {% assign val = '%)' %}
+  {% else %}
+ {% if section.settings.landimgfilter =='contrast' %}
+  {% assign filter = 'contrast' %}
+  {% assign val = '%)' %}
+  {% else %}
+ {% if section.settings.landimgfilter =='grayscale' %}
+  {% assign filter = 'grayscale' %}
+  {% assign val = '%)' %}
+  {% else %}
+ {% if section.settings.landimgfilter =='hue-rotate' %}
+  {% assign filter = 'hue-rotate' %}
+  {% assign val = 'deg)' %}
+  {% else %}
+ {% if section.settings.landimgfilter =='invert' %}
+  {% assign filter = 'invert' %}
+  {% assign val = '%)' %}
+  {% else %}
+ {% if section.settings.landimgfilter =='opacity' %}
+  {% assign filter = 'opacity' %}
+  {% assign val = '%)' %}
+  {% else %}
+ {% if section.settings.landimgfilter =='saturate' %}
+  {% assign filter = 'saturate' %}
+  {% assign val = ')' %}
+    {% else %}
+ {% if section.settings.landimgfilter =='sepia' %}
+  {% assign filter = 'sepia' %}
+  {% assign val = '%)' %}
+    {% else %}
+ {%endif %} {%endif %} {%endif %} {%endif %} {%endif %} {%endif %} {%endif %} {%endif %} {% endif %}
+  {% assign range = section.settings.filterrange %}
+<div class="page-width">
+  {% capture image_layout %}
+    <div class="feature-row__item">
+      <div style="margin: 0 auto; max-width: {{ section.settings.image_width }}px;">
+        {% if section.settings.image != blank %}
+          {% if section.settings.button_label != blank and section.settings.button_link != blank %}<a href="{{ section.settings.button_link }}">{% endif %}
+            {% assign xnegposs = section.settings.xnegpos | replace: '+', ''  %}
+            {% assign ynegposs = block.settings.ynegpos | replace: '+', ''  %}
+            {% assign spreadnegposs = section.settings.spreadnegpos | replace: '+', ''  %}
+            {% assign blurnegposs = block.settings.blurnegpos | replace: '+', ''  %}
+          <div class="image-wrap" style="height: 0; padding-bottom: {{ 100 | divided_by: section.settings.image.aspect_ratio }}%;border-radius: {{ section.settings.imgradius }}px;{% if section.settings.imgshadow %}box-shadow: {{xnegposs}}{{section.settings.xoffset}}px {{ynegposs}}{{section.settings.yoffset}}px {{blurnegposs}}{{section.settings.blur}}px {{spreadnegposs}}{{section.settings.spread}}px {{section.settings.shadowcolor}}{{section.settings.opacity}};{% endif %}">
+            {%- assign img_url = section.settings.image | img_url: '1x1' | replace: '_1x1.', '_{width}x.' -%}
+            <img class="feature-row__image lazyload"
+                data-src="{{ img_url }}"
+                data-widths="[180, 360, 540, 720, 900, 1080]"
+                data-aspectratio="{{ section.settings.image.aspect_ratio }}"
+                data-sizes="auto"
+                alt="{{ section.settings.image.alt }}"  style="{% if section.settings.imgfilter %}filter:{{filter}}({{range}}{{val}};{% endif %}" >
+
+          </div>
+          {% if section.settings.button_label != blank and section.settings.button_link != blank %}</a>{% endif %}
+        {% else %}
+          <div class="image-wrap">
+            {% include 'placeholder-svg', class: 'placeholder' %}
+          </div>
+        {% endif %}
+      </div>
+    </div>
+  {% endcapture %}
+
+  <div class="feature-row" data-aos>
+    {% if section.settings.layout == 'left' %}
+      {{ image_layout }}
+    {% endif %}
+
+    <div class="feature-row__item feature-row__text feature-row__text--{{ section.settings.layout }}">
+      {% if section.settings.subtitle != blank %}
+        <p class="h5">{{ section.settings.subtitle }}</p>
+      {% endif %}
+      {% if section.settings.title != blank %}
+        <p class="h3">{{ section.settings.title | escape }}</p>
+      {% endif %}
+      {% if section.settings.text != blank %}
+        <div class="rte featured-row__subtext">{{ section.settings.text }}</div>
+      {% endif %}
+      {% if section.settings.button_label != blank %}
+        <a href="{{ section.settings.button_link }}" class="btn" style='background-color: {{ section.settings.color_accent }}; color:{{ section.settings.text_color_accent }};'>
+          {{ section.settings.button_label }}
+        </a>
+      {% endif %}
+    </div>
+
+    {% if section.settings.layout == 'right' %}
+      {{ image_layout }}
+    {% endif %}
+  </div>
+</div>
+
+{% if section.settings.divider %}</div>{% endif %}
+
+{% schema %}
+  {
+    "name": "Image with text",
+    "class": "index-section",
+    "settings": [
+      {
+        "type": "image_picker",
+        "id": "image",
+        "label": "Image"
+      },
+      {
+        "type": "range",
+        "id": "image_width",
+        "label": "Image width",
+        "default": 500,
+        "min": 100,
+        "max": 500,
+        "step": 10,
+        "unit": "px"
+      },
+      {
+  "type": "checkbox",
+  "id": "imgshadow",
+  "label": "Show Shadow",
+  "default": true
+},
+      {
+       "type": "select",
+       "id": "xnegpos",
+       "label": "toggle to change direction of shadow",
+       "default": "+",
+       "options": [
+         {
+           "value": "+",
+           "label": "positive"
+         },
+         {
+           "value": "-",
+           "label": "negative"
+         }
+       ]
+     },
+      {
+           "type": "range",
+           "id": "xoffset",
+           "label": "x Offset",
+           "default": 5,
+           "min": 0,
+           "max": 20,
+           "step": 1,
+           "unit": "px",
+           "info": "Adjust shadow x value"
+          },
+            {
+       "type": "select",
+       "id": "ynegpos",
+       "label": "toggle to change direction of shadow",
+       "default": "+",
+       "options": [
+         {
+           "value": "+",
+           "label": "positive"
+         },
+         {
+           "value": "-",
+           "label": "negative"
+         }
+       ]
+     },
+            {
+           "type": "range",
+           "id": "yoffset",
+           "label": "Y Offset",
+           "default": 5,
+           "min": 0,
+           "max": 20,
+           "step": 1,
+           "unit": "px",
+           "info": "Adjust shadow y value"
+          },
+            {
+       "type": "select",
+       "id": "blurnegpos",
+       "label": "Toggle to change direction of shadow",
+       "default": "+",
+       "options": [
+         {
+           "value": "+",
+           "label": "positive"
+         },
+         {
+           "value": "-",
+           "label": "negative"
+         }
+       ]
+     },
+            {
+           "type": "range",
+           "id": "blur",
+           "label": "Blur",
+           "default": 5,
+           "min": 0,
+           "max": 20,
+           "step": 1,
+           "unit": "px",
+           "info": "Adjust blur of shadow"
+          },
+            {
+       "type": "select",
+       "id": "spreadnegpos",
+       "label": "toggle to change direction of shadow",
+       "default": "+",
+       "options": [
+         {
+           "value": "+",
+           "label": "positive"
+         },
+         {
+           "value": "-",
+           "label": "negative"
+         }
+       ]
+     },
+            {
+           "type": "range",
+           "id": "spread",
+           "label": "Spread",
+           "default": 5,
+           "min": 0,
+           "max": 20,
+           "step": 1,
+           "unit": "px",
+           "info": "Adjust spread of shadow"
+          },
+
+         {
+   "type": "color",
+   "id": "shadowcolor",
+   "label": "Shadow Color",
+   "default": "#CCCCCC"
+ },
+         {
+    "type": "select",
+    "id": "opacity",
+    "options": [
+ {"value": "FF","label": "100%"},
+ {"value": "FC","label": "99%"},
+ {"value": "FA","label": "98%"},
+ {"value": "F7","label": "97%"},
+ {"value": "F5","label": "96%"},
+ {"value": "F2","label": "95%"},
+ {"value": "F0","label": "94%"},
+ {"value": "ED","label": "93%"},
+ {"value": "EB","label": "92%"},
+ {"value": "E8","label": "91%"},
+ {"value": "E6","label": "90%"},
+ {"value": "E3","label": "89%"},
+ {"value": "E0","label": "88%"},
+ {"value": "DE","label": "87%"},
+ {"value": "DB","label": "86%"},
+ {"value": "D9","label": "85%"},
+ {"value": "D6","label": "84%"},
+ {"value": "D4","label": "83%"},
+ {"value": "D1","label": "82%"},
+ {"value": "CF","label": "81%"},
+ {"value": "CC","label": "80%"},
+ {"value": "C9","label": "79%"},
+ {"value": "C7","label": "78%"},
+ {"value": "C4","label": "77%"},
+ {"value": "C2","label": "76%"},
+ {"value": "BF","label": "75%"},
+ {"value": "BD","label": "74%"},
+ {"value": "BA","label": "73%"},
+ {"value": "B8","label": "72%"},
+ {"value": "B5","label": "71%"},
+ {"value": "B3","label": "70%"},
+ {"value": "B0","label": "69%"},
+ {"value": "AD","label": "68%"},
+ {"value": "AB","label": "67%"},
+ {"value": "A8","label": "66%"},
+ {"value": "A6","label": "65%"},
+ {"value": "A3","label": "64%"},
+ {"value": "A1","label": "63%"},
+ {"value": "9E","label": "62%"},
+ {"value": "9C","label": "61%"},
+ {"value": "99","label": "60%"},
+ {"value": "96","label": "59%"},
+ {"value": "94","label": "58%"},
+ {"value": "91","label": "57%"},
+ {"value": "8F","label": "56%"},
+ {"value": "8C","label": "55%"},
+ {"value": "8A","label": "54%"},
+ {"value": "87","label": "53%"},
+ {"value": "85","label": "52%"},
+ {"value": "82","label": "51%"},
+ {"value": "80","label": "50%"},
+ {"value": "7D","label": "49%"},
+ {"value": "7A","label": "48%"},
+ {"value": "78","label": "47%"},
+ {"value": "75","label": "46%"},
+ {"value": "73","label": "45%"},
+ {"value": "70","label": "44%"},
+ {"value": "6E","label": "43%"},
+ {"value": "6B","label": "42%"},
+ {"value": "69","label": "41%"},
+ {"value": "66","label": "40%"},
+ {"value": "63","label": "39%"},
+ {"value": "61","label": "38%"},
+ {"value": "5E","label": "37%"},
+ {"value": "5C","label": "36%"},
+ {"value": "59","label": "35%"},
+ {"value": "57","label": "34%"},
+ {"value": "54","label": "33%"},
+ {"value": "52","label": "32%"},
+ {"value": "4F","label": "31%"},
+ {"value": "4D","label": "30%"},
+ {"value": "4A","label": "29%"},
+ {"value": "47","label": "28%"},
+ {"value": "45","label": "27%"},
+ {"value": "42","label": "26%"},
+ {"value": "40","label": "25%"},
+ {"value": "3D","label": "24%"},
+ {"value": "3B","label": "23%"},
+ {"value": "38","label": "22%"},
+ {"value": "36","label": "21%"},
+ {"value": "33","label": "20%"},
+ {"value": "30","label": "19%"},
+ {"value": "2E","label": "18%"},
+ {"value": "2B","label": "17%"},
+ {"value": "29","label": "16%"},
+ {"value": "26","label": "15%"},
+ {"value": "24","label": "14%"},
+ {"value": "21","label": "13%"},
+ {"value": "1F","label": "12%"},
+ {"value": "1C","label": "11%"},
+ {"value": "1A","label": "10%"},
+ {"value": "17","label": "9%"},
+ {"value": "14","label": "8%"},
+ {"value": "12","label": "7%"},
+ {"value": "0F","label": "6%"},
+ {"value": "0D","label": "5%"},
+ {"value": "0A","label": "4%"},
+ {"value": "8","label": "3%"},
+ {"value": "5","label": "2%"},
+ {"value": "3","label": "1%"},
+ {"value": "0","label": "0%"}
+
+    ],
+    "label": "Adjust transparency of shadow"
+ },
+		  {
+            "type": "checkbox",
+            "id": "imgfilter",
+            "label": "enable image filters",
+            "default": true
+          },
+		  {
+       "type": "select",
+       "id": "landimgfilter",
+       "options": [
+          { "value": "blur", "label": "Blur"},
+          { "value": "brightness", "label": "Brightness"},
+          { "value": "contrast", "label": "Contrast"},
+		  { "value": "grayscale", "label": "Grayscale"},
+          { "value": "hue-rotate", "label": "Hue Rotation"},
+		  { "value": "invert", "label": "Invert"},
+          { "value": "opacity", "label": "Opacity"},
+		   { "value": "saturate", "label": "Saturate"},
+          { "value": "sepia", "label": "Sepia"}
+
+
+       ],
+       "label": "image filters"
+    },
+	{
+    "type":      "range",
+    "id":        "filterrange",
+    "min":       1,
+    "max":        100,
+    "step":       1,
+    "unit":       "nrd",
+    "label":     "Adust filter amount",
+    "default":   16
+	  },
+	  {
+        "type": "text",
+        "id": "imgradius",
+        "label": "Image border radius",
+        "default": "5"
+      },
+      {
+        "type": "text",
+        "id": "subtitle",
+        "label": "Subheading",
+        "default": "Improved"
+      },
+      {
+        "type": "text",
+        "id": "title",
+        "label": "Heading",
+        "default": "Image with text"
+      },
+      {
+        "type": "richtext",
+        "id": "text",
+        "label": "Text",
+        "default": "<p>Pair large text with an image to tell a story, explain a detail about your product, or describe a new promotion.</p>"
+      },
+      {
+        "type": "text",
+        "id": "button_label",
+        "label": "Button label",
+        "default": "Optional button"
+      },
+      {
+        "type": "url",
+        "id": "button_link",
+        "label": "Button link"
+      },
+	 {
+        "type": "color",
+        "id": "color_accent",
+        "label": "Buttons",
+        "default": "rgba(0,0,0,0)"
+      },
+	 {
+        "type": "color",
+        "id": "text_color_accent",
+        "label": "Text Buttons",
+        "default": "rgba(0,0,0,0)"
+      },
+      {
+        "type": "select",
+        "id": "layout",
+        "label": "Layout",
+        "default": "left",
+        "options": [
+          {
+            "value": "left",
+            "label": "Image on left"
+          },
+          {
+            "value": "right",
+            "label": "Image on right"
+          }
+        ]
+      },
+      {
+        "type": "checkbox",
+        "id": "divider",
+        "label": "Show section divider",
+        "default": false
+      }
+    ],
+    "presets": [
+      {
+        "name": "Image with text",
+        "category": "Image"
+      }
+    ]
+  }
+{% endschema %}
